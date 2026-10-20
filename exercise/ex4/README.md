@@ -17,7 +17,7 @@ Replay can be performed on a (non-partitioned) queue or topic endpoint. When ini
 
 ## Exercise 4.2 Experimenting with Replay
 
-1. Click on Replay on the left hand menu to check that Replay is enabled. Confirm the pop-up that your subscriber is no longer connected once you leave the 'Try-me' tool.
+1. Click on Replay on the left hand menu to check that Replay is enabled. Confirm the pop-up that your subscriber is no longer connected once you leave the 'TryMe!' tool.
 
 ![AEM Replay](images/ex4_1.png)
 

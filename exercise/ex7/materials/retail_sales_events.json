@@ -1,0 +1,19 @@
+{
+  "transactionId": "TXN-100001",
+  "lineNumber": 1,
+  "region": "emea",
+  "storeId": "store-042",
+  "timestamp": "2026-06-15T08:03:11Z",
+  "productSku": "SKU-BEV-0012",
+  "productName": "Sparkling Water 1L",
+  "productCategory": "beverages",
+  "quantity": 2,
+  "unitPrice": 1.49,
+  "totalAmount": 2.98,
+  "vatRate": 0.09,
+  "grossAmount": 3.25,
+  "currency": "EUR",
+  "paymentMethod": "card",
+  "loyaltyId": "LOY-88231",
+  "cashierId": "CASH-07"
+}

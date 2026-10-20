@@ -1,0 +1,16 @@
+transactionId,lineNumber,region,storeId,timestamp,productSku,productName,productCategory,quantity,unitPrice,totalAmount,vatRate,grossAmount,currency,paymentMethod,loyaltyId,cashierId
+TXN-100001,1,emea,store-042,2026-06-15T08:03:11Z,SKU-BEV-0012,Sparkling Water 1L,beverages,2,1.49,2.98,0.09,3.25,EUR,card,LOY-88231,CASH-07
+TXN-100001,2,emea,store-042,2026-06-15T08:03:11Z,SKU-BAK-0033,Whole Grain Bread,bakery,1,2.29,2.29,0.09,2.50,EUR,card,LOY-88231,CASH-07
+TXN-100001,3,emea,store-042,2026-06-15T08:03:11Z,SKU-DAI-0101,Gouda Cheese 200g,dairy,1,3.79,3.79,0.09,4.13,EUR,card,LOY-88231,CASH-07
+TXN-100002,1,emea,store-012,2026-06-15T08:17:44Z,SKU-CNF-0210,Belgian Pralines 250g,confectionery,1,8.95,8.95,0.06,9.49,EUR,mobile,LOY-44190,CASH-03
+TXN-100002,2,emea,store-012,2026-06-15T08:17:44Z,SKU-BEV-0077,Espresso Beans 1kg,beverages,1,12.49,12.49,0.06,13.24,EUR,mobile,LOY-44190,CASH-03
+TXN-100003,1,emea,store-101,2026-06-15T08:31:02Z,SKU-BAK-0001,Baguette Tradition,bakery,3,1.10,3.30,0.055,3.48,EUR,cash,,CASH-11
+TXN-100003,2,emea,store-101,2026-06-15T08:31:02Z,SKU-DAI-0145,Camembert 250g,dairy,1,2.85,2.85,0.055,3.01,EUR,cash,,CASH-11
+TXN-100003,3,emea,store-101,2026-06-15T08:31:02Z,SKU-BEV-0301,Red Wine Bordeaux 75cl,beverages,2,9.50,19.00,0.20,22.80,EUR,cash,,CASH-11
+TXN-100004,1,emea,store-205,2026-06-15T08:45:39Z,SKU-BAK-0050,Pretzel 6-pack,bakery,1,1.99,1.99,0.07,2.13,EUR,card,LOY-67410,CASH-02
+TXN-100004,2,emea,store-205,2026-06-15T08:45:39Z,SKU-BEV-0150,Lager Beer 6x33cl,beverages,1,5.49,5.49,0.19,6.53,EUR,card,LOY-67410,CASH-02
+TXN-100004,3,emea,store-205,2026-06-15T08:45:39Z,SKU-SNK-0088,Potato Chips 200g,snacks,2,1.89,3.78,0.07,4.04,EUR,card,LOY-67410,CASH-02
+TXN-100005,1,emea,store-042,2026-06-15T09:02:18Z,SKU-PRD-0009,Bananas 1kg,produce,1,1.69,1.69,0.09,1.84,EUR,cash,,CASH-07
+TXN-100005,2,emea,store-042,2026-06-15T09:02:18Z,SKU-DAI-0102,Greek Yogurt 500g,dairy,2,2.15,4.30,0.09,4.69,EUR,cash,,CASH-07
+TXN-100006,1,emea,store-012,2026-06-15T09:14:55Z,SKU-BEV-0044,Orange Juice 1L,beverages,1,2.39,2.39,0.06,2.53,EUR,mobile,LOY-90233,CASH-03
+TXN-100006,2,emea,store-012,2026-06-15T09:14:55Z,SKU-BAK-0070,Croissant 4-pack,bakery,1,3.49,3.49,0.06,3.70,EUR,mobile,LOY-90233,CASH-03

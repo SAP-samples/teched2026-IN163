@@ -1,4 +1,4 @@
-![Pic 1](../../images/ex0-1.jpg)
+![Pic 1](../../images/ex0-1.png)
 
 # Getting Started
 

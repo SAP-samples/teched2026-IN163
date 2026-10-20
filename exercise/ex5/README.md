@@ -128,4 +128,8 @@ Here you can check which events are the most re-used ones.
 
 ## Summary
 
-You've now explored how you scale your event-driven architecture.
+You've now explored how you scale your event-driven architecture. And this is the end of the beginner track.
+
+If you want to, you can now have a closer look at one of the advanced topics.
+
+ - Go back to the main page - [Main Page](../../README.md)

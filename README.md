@@ -1,16 +1,14 @@
+# TechEd 2026: Build your <span style="color:red;"> own </span> event-driven scenario with advanced event mesh
 
-
-# TechEd Berlin 2026 - IN163: Build your own event-driven scenario with advanced event mesh
-
-![Pic 1](images/ISF-1.jpg)
+![Pic 1](images/ISF-1.png)
 
 ## Description
 
-SAP Integration Suite, advanced event mesh is SAP's flagship event broker. 
+SAP Integration Suite, advanced event mesh is SAP's flagship event broker. Actually, it is more than just that: it allows you to create meshes of event brokers and to use a state-of-the-art eventing platform, operations and event management features. Explore these powerful features of SAP Integration Suite, advanced event mesh. 
 
-Actually, it is more than just that: it allows you to create meshes of event brokers and to use powerful eventing platform, operations and event management features. Explore these powerful features of SAP Integration Suite, advanced event mesh. 
+The goal is for you to learn what you need for an event-driven scenario in an end-to-end way. Start with core event-driven architecture elements like queues and topics, then dive into advanced topics and filtering to simulate a social media–like experience. Next you can try out advanced capabilities such as event replay. You will as well learn about the features and tools that allow you to achieve the event-driven hockey stick - and before that you learn what that is. In the starter scenario you can simulate events using AEM tooling on both source and consumer side. AEM offers the TryMe! tool for that. On top, you can install a small local HTML based tool for local event consumption.
 
-Start with core event-driven architecture elements like queues and topics, then dive into advanced topics and filtering to simulate a social media–like experience. Try out advanced capabilities such as event replay. Finally learn about the features and tools that allow you to achieve the event-driven hockey stick.
+If you want to go beyond, in the advanced track we do offer the chance to check out the new Event Studio that is part of the Event Add-On for ERP. The Add-On allows you to create custom events, and this is what you can do. Create an event, trigger it, and consume it in AEM using the TryMe! tool. Then, you can have a look at on-ramping and off-ramping events to the mesh using the Micro-Integration functionality of Advanced Event Mesh.
 
 ## Overview
 
@@ -49,15 +47,15 @@ SAP Integration Suite, advanced event mesh features touched, some just shortly, 
 
 - Understanding the basics of event-driven architectures, namely events, queues, topics, event subscriptions ...
 - You would be able to execute most of the exercises without prior experience by just following the descriptions. For taking value out of the chance to explore Advanced Event Mesh some experience with event-driven architectures is recommended.
-- Important: this session offers a main track on beginner level. On top of that, it offers several deep dive topics that typically required at least advanced know-how.
+- Important: this session offers a main track on beginner level. On top of that, it offers several deep dive topics that typically require at least advanced know-how. If you follow the main track and add the Event Studio exercise, you are well equipped to create custom events, distribute them via the broker based on topics and filtering, and consume them. In a real world scenario you would obviously have to replace the TryMe! tool with a real consumer. This is very straighforward though - as you could see by adding the HTML-based consumer to your scenario.
 
 ## Exercises
 
-![Pic 3](images/ISF-3.jpeg)
+![Pic 3](images/ISF-3.png)
 
 ### MAIN TRACK (work on exercises in the given order)
 
-This is the main track this is geared at beginner level. Start from the beginning and follow the flow of the exercises.
+This is the main track that is geared at beginner level. Start from the beginning and follow the flow of the exercises.
 
 Preparation and Setup
 
@@ -71,6 +69,7 @@ SAP Integration Suite, advanced event mesh
     - [Exercise 1.2 - Create a Queue in Advanced Event Mesh ](exercise/ex1#exercise-12---create-a-queue-in-advanced-event-mesh)
     - [Exercise 1.3 - Create a Subscription in Advanced Event Mesh](exercise/ex1#exercise-13---create-a-queue-subscription-in-advanced-event-mesh)
     - [Exercise 1.4 - Send an event from the Try Me! Tool to your Topic](exercise/ex1#exercise-14---send-an-event-from-the-try-me-tool-to-your-topic)
+    - [Exercise 1.5 - Consume events from an external consumer app](exercise/ex1#exercise-15---consume-events-using-an-external-consumer-app)
 
 - [Exercise 2 - Topic Hierarchies](exercise/ex2/)
 
@@ -93,15 +92,13 @@ SAP Integration Suite, advanced event mesh
     - [Exercise 5.2 - Explore Events in the SAP Business Accelerator Hub](exercise/ex5/README.md#exercise-52-explore-business-accelerator-hub)
     - [Exercise 5.3 - Experiment with the Event Portal](exercise/ex5/README.md#exercise-53-experimenting-with-replay)
 
-### Deep Dive Topics (you can work on exercises in whatever order you prefer)
+### Deep Dive Topics 
 
-The Deep Dive track contains advanced topics. You can pick a topic, or work on different topics in whatever order you like.
+The Deep Dive track contains advanced topics. You can pick a single topic, or work on both topics in whatever order you like.
 
 - [Exercise 6 - Event Add-On for ERP - Event Studio Deep Dive ](exercise/ex6/)
 
 - [Exercise 7 - Micro-Integrations](exercise/ex7/)
-
-- [Exercise 8 - AEM and Integration Suite](exercise/ex8/)
 
 ## User Data and Password
 
@@ -109,7 +106,9 @@ In order to log into Advanced Event Mesh, you can use the below email address wi
 
 handson_XXX@education.cloud.sap (e.g. handson_012@education.cloud.sap)
 
-The password will be provided to you by the moderators.
+The initial password will be provided to you by the moderators.
+
+When you log in for the first time, you can enter a password of your choice.
 
 ## Background Material
 
@@ -126,7 +125,8 @@ In case that you would like to dig deeper into event-driven architecture: a lot 
 - Videos
 
     - [Devtoberfest 2024: Discover SAP Event Sources for Advanced Event Mesh](https://www.youtube.com/watch?v=NujHueCBDOw)
-    - [Devtoberfest 2025: Hands-on session: practival demonstration of the Event Add-On for ERP](https://www.youtube.com/watch?v=vwzqNLISvHo)
+    - [Devtoberfest 2025: Hands-on session: practical demonstration of the Event Add-On for ERP](https://www.youtube.com/watch?v=vwzqNLISvHo)
+    - [Devtoberfest 2026: Hands-on session: practical demonstration of the Event Studio](https://www.youtube.com/watch?v=HyLYUZ7bcII)
 
 - Documentation
 
@@ -144,4 +144,4 @@ Please continue with [Exercise 0](exercise/ex0/)
 Support for the content in this repository is available during the actual time of the online session for which this content has been designed. Otherwise, you may request support via the [Issues](../../issues) tab.
 
 ## License
-Copyright 2026 SAP SE or an SAP affiliate company and <your-project> contributors. Please see our [LICENSE](LICENSE) for copyright and license information. Detailed information including third-party components and their licensing/copyright information is available [via the REUSE tool](https://api.reuse.software/info/github.com/SAP/<your-project>).
+Copyright (c) 2026 SAP SE or an SAP affiliate company. All rights reserved. This project is licensed under the Apache Software License, version 2.0 except as noted otherwise in the [LICENSE](LICENSES/Apache-2.0.txt) file.

@@ -17,7 +17,7 @@ Link: https://eu10.console.pubsub.em.services.cloud.sap/login?zone-id=908a280d-c
 
 ![Pic 1](../../images/ex1-1.png)
 
-Check out the different areas in the <b>Advanced Event Mesh cockpit</b> , representing the different categories of services AEM offers
+Check out the different areas in the <b>Advanced Event Mesh cockpit</b>, representing the different categories of services AEM offers:
 
 - <b>Mission Control</b>: Mission Control makes it easy to deploy event brokers, create event meshes, and optimize and monitor the health/performance of an event-driven system. Mission Control is a section in the Cloud Console that permits you to access event brokers, visualize and manage your event broker services, and visualize and design event meshes. Mission Control has a Cluster Manager and Mesh Manager that permits you to create event broker services and manage your event mesh.
 
@@ -119,58 +119,97 @@ HINT: Please note that this topic is very simple to facilitate this exercise. In
 
 ## Exercise 1.4 - Send an event from the Try Me! tool to your topic
 
-16. Switch to the **"Try Me!"** Section in the menu on the right.
+16. Switch to the **"Try Me!"** Section in the menu on the left.
 
-17. Press the **"expand"-Icon** to show the connection details. Please note, that the properties have to be adjusted, otherwise the connection is not going to work. We will add the correct properties in the next steps.
+![Pic 13](../../images/ex1-26.png)  
 
-![image](https://github.com/user-attachments/assets/f3888a68-64c9-4fda-8003-b4a7b4a18ff2)
+17. You are now in the TryMe tool
 
-18. Keep your current browser tab open and **go back to the other/main tab** and click on **"Connect"**. Select **View by "Protocol"**.
+![Pic 14](../../images/ex1-27.png)  
 
-![image](https://github.com/user-attachments/assets/99758623-d373-4270-93ba-258b18a63c07)
+18. You might have to press the **"expand"-Icon** to show the connection details. Please note, that the properties have to be adjusted, otherwise the connection is not going to work. We will add the correct properties in the next steps.
 
-19. Open the **"Solace Web Messaging"** entry and select **"Solace JavaScript API"**. Now a Pop-up on the right shows the connection details to use.
+19. Keep your current browser tab open and **go back to the other/main tab** and click on **"Connect"**. Select **View by "Protocol"**.
+
+![Pic 15](../../images/ex1-28.png)  
+
+20. Open the **"Solace Web Messaging"** entry and select **"Solace JavaScript API"**. Now a Pop-up on the right shows the connection details to use.
+
+![Pic 16](../../images/ex1-29.png)  
+
+21. Copy these details into the according properties of the "Try Me!" tool. Overwrite existing values.
     
-21. Copy these details into the according properties of the "Try Me!" tool opened in step 14. Overwrite existing values.
-    
-![image](https://github.com/user-attachments/assets/cb86bcc7-7dc7-456c-b9e2-16ff53870d85)
+![Pic 17](../../images/ex1-30.png)  
 
-23. Click on <b>Connect</b> in the <b>Publisher Section</b>
+22. Click on <b>Connect</b> in the <b>Publisher Section</b>
 >Important: If your browser asks to select a certificate for authentication, press "Cancel" otherwise the connection will fail! If you accidentially clicked on a certificate, please restart your browser to show the dialog again.
 
+![Pic 18](../../images/ex1-31.png)  
 
-![image](https://github.com/user-attachments/assets/f16d3830-6144-4aee-a28d-1da0a57a8b13)
-
-
-
-22. Enter your topic
+23. Enter your topic. You can as well clear all the pre-filled entries by clicking the link. On top, add a message that you like. Recommendation would be Hello World!
     
-![Pic 22](../../images/ex1-22-topic.png)  
+![Pic 19](../../images/ex1-32.png)  
 
-
-24. Click <b>Publish</b> to send your message (most likely Hello World!) to your topic
+24. Click <b>Publish</b> to send your message to your topic
 
 25. You should see 1 message published in the <b>Publish Status</b>
 
-![image](https://github.com/user-attachments/assets/0c580931-a436-4102-8ad9-ff73ab632182)
+![Pic 20](../../images/ex1-33.png)  
 
+26. Switch back to the <b>Queues</b>
 
-25. Switch back to the <b>Queues</b>
+![Pic 21](../../images/ex1-34.png)  
 
-![Pic 22](../../images/ex1-25.png)  
+27. Search for the queue you have created earlier. You should see one message queued.
 
-26. Search for the queue you had created earlier. You should see one message queued.
-
-![Pic 22](../../images/ex1-22.png)  
+![Pic 22](../../images/ex1-35.png)  
 
 You have sent a message to a topic, and via the subscription this message has been stored in your queue.
 
-27. You can leave it like this or you can play the same game a little longer: go back to the Try Me! tool and just click publish, and see in the other tab how the count of messages gets increased (don't forget to refresh the page). When you click on your queue, you get a more detailed summary.
+28. You can leave it like this or you can play the same game a little longer: go back to the Try Me! tool and just click publish, and see in the other tab how the count of messages gets increased (don't forget to refresh the page). When you click on your queue, you get a more detailed summary.
 
-![Pic 23](../../images/ex1-23.png)  
+![Pic 23](../../images/ex1-36.png)  
+
+## Exercise 1.5 - Consume events using an external consumer app
+
+29. There is one more thing you can do. So far we have been using the TryMe! tool which is very convenient since it is part of AEM. It is a real producer and a real consumer, and publishes and consumes the same way "external producers and consumers" would do.
+
+It might still be interesting - and give you some more the feeling of real E2E eventing - to see a consumer outside of AEM that consumes events from your queue.
+
+We have therefore created this small HTML-Application that connects to the AEM Broker and consumes events from a queue.
+
+You can find it here in the GitHub structure: ex1/consumerapp/aem-consumer.html
+
+Download this file and start it.
+
+30. The app starts up in your browser and looks like this
+
+![Pic 24](../../images/ex1-37.png)  
+
+31. Now fill in the required entries that you get from your broker. It's the same approach as before with the TryMe! tool. 
+
+![Pic 25](../../images/ex1-38.png) 
+
+With one difference: this time you need to enter the queue to consume from as well. The queue will most likely be User_XXX (replace XXX with your number).
+
+![Pic 26](../../images/ex1-39.png) 
+
+32. Click connect and make sure to click Cancel if you are asked for a certificate. You have to be quick, otherwise you get a timeout.
+
+![Pic 27](../../images/ex1-40.png) 
+
+33. Now you are connected and every event ending up in your queue is consumed by the Consumer-App.
+
+![Pic 28](../../images/ex1-41.png) 
+
+So, you have two options using the TryMe! tool: you can either send an event directly into the queue or you can publish an event to your topic.
+
+HINT: consuming from a queue is a common approach. You get the buffering that you do not get from topics. If you, and we have done that, combine this with the queue subscribing to a topic you have the best of both worlds.
+
+34. When you are done click Disconnect and close the tool. If the app would keep consuming this could lead to confusion with some of our later exercises - the reason would be two consumers consuming from the same queue. So, please disconnect the consumer app.
 
 ## Summary
 
-You have now created a queue in AEM and have subscribed to events via a topic. You have sent events to this topic using the Try me! tool.
+You have now created a queue in AEM and have subscribed to events via a topic. You have sent events to this topic using the Try me! tool. On top, ylou have consumed events from the queue via an external tool.
 
 Please continue with [Exercise 2 - Explore Topic Hierarchies and Wildcards](../ex2/README.md)

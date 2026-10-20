@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AEM Event Consumer</title>
+  <style>
+    /* ── CSS custom properties ─────────────────────────────── */
+    :root {
+      --bg-page:        #0f1117;
+      --bg-card:        #1a1d27;
+      --bg-card-hover:  #21253a;
+      --bg-header:      #13161f;
+      --bg-input:       #0f1117;
+      --bg-banner:      #0d1526;
+      --accent:         #2563eb;
+      --accent-dim:     #1d4ed8;
+      --accent-hover:   #3b82f6;
+      --text-primary:   #e8eaf2;
+      --text-secondary: #8b90a8;
+      --text-dim:       #555a72;
+      --border:         #2a2d3e;
+      --border-focus:   #2563eb;
+      --error:          #ff5f57;
+      --warning:        #ffb340;
+      --success:        #32d74b;
+      --json-key:       #79b8ff;
+      --json-string:    #85e89d;
+      --json-number:    #f97583;
+      --json-bool:      #c88dff;
+      --json-null:      #79b8ff;
+      --shadow:         0 2px 12px rgba(0,0,0,0.4);
+      --radius:         8px;
+      --radius-sm:      4px;
+      --font-ui:        system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono:      'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+    }
+    :root.light {
+      --bg-page:        #f4f5f8;
+      --bg-card:        #ffffff;
+      --bg-card-hover:  #f0f2f7;
+      --bg-header:      #ffffff;
+      --bg-input:       #ffffff;
+      --bg-banner:      #eff6ff;
+      --accent:         #2563eb;
+      --accent-dim:     #1d4ed8;
+      --accent-hover:   #3b82f6;
+      --text-primary:   #1a1d27;
+      --text-secondary: #555a72;
+      --text-dim:       #8b90a8;
+      --border:         #d4d8e8;
+      --border-focus:   #2563eb;
+      --json-key:       #0050a0;
+      --json-string:    #1a7a40;
+      --json-number:    #b5000f;
+      --json-bool:      #7000b5;
+      --json-null:      #0050a0;
+      --shadow:         0 2px 8px rgba(0,0,0,0.12);
+    }
+
+    /* ── Reset & base ──────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      background: var(--bg-page);
+      color: var(--text-primary);
+      font-family: var(--font-ui);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+    button {
+      font-family: inherit;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
+      border-radius: var(--radius-sm);
+      transition: background 0.15s, opacity 0.15s;
+    }
+    button:disabled { opacity: 0.45; cursor: not-allowed; }
+    input, select {
+      font-family: inherit;
+      font-size: 14px;
+      background: var(--bg-input);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 7px 10px;
+      outline: none;
+      width: 100%;
+      transition: border-color 0.15s;
+    }
+    input:focus, select:focus { border-color: var(--border-focus); }
+    select option { background: var(--bg-card); }
+    label { display: block; font-size: 13px; color: var(--text-secondary); margin-bottom: 4px; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Layout ────────────────────────────────────────────── */
+    #app {
+      display: grid;
+      grid-template-rows: auto auto auto 1fr auto;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ── Header ────────────────────────────────────────────── */
+    #header {
+      background: var(--bg-header);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    #header h1 {
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      flex: 1;
+    }
+    #header h1 span { color: var(--accent); }
+    #status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      background: var(--bg-card);
+    }
+    #status-badge.connected  { border-color: var(--success); color: var(--success); }
+    #status-badge.connecting { border-color: var(--warning); color: var(--warning); }
+    #status-badge.error      { border-color: var(--error);   color: var(--error); }
+    .badge-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+    .badge-dot.pulse { animation: pulse 1.2s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+    #theme-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 5px 10px;
+      font-size: 13px;
+    }
+    #theme-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── Banners ───────────────────────────────────────────── */
+    #banners { background: var(--bg-page); }
+    .banner {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 20px;
+      font-size: 13px;
+      border-bottom: 1px solid var(--border);
+      animation: slideDown 0.2s ease;
+    }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-6px); }
+      to   { opacity: 1; transform: none; }
+    }
+    .banner.info    { background: var(--bg-banner); color: var(--text-primary); }
+    .banner.error   { background: #2a0f0d; color: var(--error);   border-color: #4a1a17; }
+    .banner.warning { background: #251a00; color: var(--warning); border-color: #3a2800; }
+    .banner.success { background: #0d2a10; color: var(--success); border-color: #1a3d1e; }
+    .banner-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+    .banner-body { flex: 1; }
+    .banner-body strong { display: block; margin-bottom: 2px; }
+    .banner-close {
+      background: transparent;
+      color: inherit;
+      opacity: 0.6;
+      font-size: 16px;
+      padding: 0 4px;
+      line-height: 1;
+    }
+    .banner-close:hover { opacity: 1; }
+
+    /* ── Config panel ──────────────────────────────────────── */
+    #config-panel {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+    }
+    #config-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 13px;
+      padding: 10px 20px;
+      text-align: left;
+      border-radius: 0;
+    }
+    #config-toggle:hover { color: var(--text-primary); background: var(--bg-card-hover); }
+    #config-toggle-icon { transition: transform 0.2s; }
+    #config-toggle-icon.open { transform: rotate(90deg); }
+    #config-form {
+      padding: 16px 20px 20px;
+      display: none;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 20px;
+    }
+    #config-form.visible { display: grid; }
+    .field { display: flex; flex-direction: column; }
+    .field.full { grid-column: 1 / -1; }
+    .field-hint {
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 3px;
+    }
+    .remember-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+    .remember-row input[type=checkbox] { width: auto; }
+
+    /* ── Controls ──────────────────────────────────────────── */
+    #controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: var(--bg-header);
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      padding: 7px 18px;
+      font-weight: 500;
+    }
+    .btn-primary:hover:not(:disabled) { background: var(--accent-hover); }
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+    }
+    .btn-secondary:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+    .btn-danger {
+      background: transparent;
+      color: var(--error);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+    }
+    .btn-danger:hover:not(:disabled) { border-color: var(--error); background: rgba(255,95,87,0.08); }
+    #msg-count { margin-left: auto; font-size: 13px; color: var(--text-secondary); }
+
+    /* ── Message feed ──────────────────────────────────────── */
+    #message-feed {
+      overflow-y: auto;
+      padding: 12px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    #empty-state {
+      margin: auto;
+      text-align: center;
+      color: var(--text-dim);
+      padding: 40px 20px;
+    }
+    #empty-state .empty-icon { font-size: 40px; margin-bottom: 12px; }
+    #empty-state p { font-size: 14px; }
+    .msg-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      animation: cardIn 0.18s ease;
+      box-shadow: var(--shadow);
+    }
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: none; }
+    }
+    .msg-card:hover { border-color: var(--accent); }
+    .msg-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: var(--bg-header);
+      border-bottom: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    .msg-time   { font-weight: 600; color: var(--text-primary); }
+    .msg-source {
+      background: rgba(37,99,235,0.15);
+      color: var(--accent);
+      border-radius: 3px;
+      padding: 1px 6px;
+    }
+    .msg-type {
+      background: var(--bg-page);
+      border-radius: 3px;
+      padding: 1px 6px;
+    }
+    .msg-actions { margin-left: auto; display: flex; gap: 4px; }
+    .msg-action-btn {
+      background: transparent;
+      color: var(--text-dim);
+      font-size: 13px;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+    .msg-action-btn:hover { color: var(--text-primary); background: var(--bg-card); }
+    .msg-body {
+      padding: 10px 12px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    .msg-body pre {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .json-key    { color: var(--json-key); }
+    .json-string { color: var(--json-string); }
+    .json-number { color: var(--json-number); }
+    .json-bool   { color: var(--json-bool); }
+    .json-null   { color: var(--json-null); }
+
+    /* ── Status bar ────────────────────────────────────────── */
+    #status-bar {
+      background: var(--bg-header);
+      border-top: 1px solid var(--border);
+      padding: 5px 20px;
+      font-size: 12px;
+      color: var(--text-dim);
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* ── Scrollbar ─────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
+
+    /* ── Responsive ────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      #config-form { grid-template-columns: 1fr; }
+      .field.full  { grid-column: 1; }
+      #controls    { gap: 6px; }
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+
+  <!-- ── Header ─────────────────────────────────────────────── -->
+  <header id="header">
+    <h1>AEM <span>Event Consumer</span></h1>
+    <div id="status-badge">
+      <span class="badge-dot"></span>
+      <span id="status-text">Disconnected</span>
+    </div>
+    <button id="theme-btn" onclick="toggleTheme()">&#9788;</button>
+  </header>
+
+  <!-- ── Banners ────────────────────────────────────────────── -->
+  <div id="banners"></div>
+
+  <!-- ── Config panel ───────────────────────────────────────── -->
+  <div id="config-panel">
+    <button id="config-toggle" onclick="toggleConfig()">
+      <span id="config-toggle-icon" class="open">&#9654;</span>
+      Connection Settings
+    </button>
+    <div id="config-form" class="visible">
+
+      <div class="field full">
+        <label for="smf-url">SMF WebSocket URL</label>
+        <input id="smf-url" type="text"
+          placeholder="wss://broker.example.com:8443"
+          autocomplete="off" spellcheck="false" />
+        <span class="field-hint">Plain WebSocket: <code>ws://host:8008</code> &nbsp;|&nbsp; TLS: <code>wss://host:8443</code></span>
+      </div>
+
+      <div class="field">
+        <label for="vpn">Message VPN</label>
+        <input id="vpn" type="text" placeholder="default" autocomplete="off" />
+      </div>
+
+      <div class="field">
+        <label for="queue">Queue Name</label>
+        <input id="queue" type="text" placeholder="my-queue" autocomplete="off" spellcheck="false" />
+      </div>
+
+      <div class="field">
+        <label for="username">Username</label>
+        <input id="username" type="text" autocomplete="off" />
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input id="password" type="password" autocomplete="current-password" />
+      </div>
+
+      <div class="field full">
+        <label class="remember-row">
+          <input type="checkbox" id="remember-pw" />
+          Remember password in this browser
+        </label>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── Controls ───────────────────────────────────────────── -->
+  <div id="controls">
+    <button id="connect-btn"    class="btn-primary"   onclick="startConsumer()">Connect</button>
+    <button id="disconnect-btn" class="btn-secondary" onclick="stopConsumer()" disabled>Disconnect</button>
+    <button class="btn-secondary" onclick="exportMessages()">Export JSON</button>
+    <button class="btn-danger"    onclick="clearMessages()">Clear</button>
+    <span id="msg-count">0 messages</span>
+  </div>
+
+  <!-- ── Message feed ───────────────────────────────────────── -->
+  <div id="message-feed">
+    <div id="empty-state">
+      <div class="empty-icon">&#9741;</div>
+      <p>Configure the connection above and click <strong>Connect</strong></p>
+      <p style="margin-top:6px;font-size:13px">Messages will appear here in real time via SMF/WebSocket</p>
+    </div>
+  </div>
+
+  <!-- ── Status bar ─────────────────────────────────────────── -->
+  <div id="status-bar">
+    <span id="sb-transport">Protocol: SMF/WebSocket (solclientjs)</span>
+    <span id="sb-last">Last message: —</span>
+    <span id="sb-total">Total received: 0</span>
+  </div>
+
+</div>
+
+<!-- solclientjs loaded from unpkg CDN -->
+<script src="https://unpkg.com/solclientjs@10/lib-browser/solclient.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  /* ─── Constants ────────────────────────────────────────────── */
+  var STORAGE_KEY  = 'aem_consumer_v2';
+  var MAX_MESSAGES = 500;
+
+  /* ─── State ─────────────────────────────────────────────────── */
+  var solaceSession = null;
+  var msgConsumer   = null;
+  var messages      = [];
+  var totalReceived = 0;
+  var sdkReady      = false;
+
+  /* ─── solclientjs initialisation ────────────────────────────── */
+  function initSdk() {
+    if (typeof solace === 'undefined') {
+      showBanner('error', 'SDK unavailable',
+        'solclientjs could not be loaded from CDN. ' +
+        'Check your internet connection and reload the page.');
+      return false;
+    }
+    if (!sdkReady) {
+      try {
+        var fp = new solace.SolclientFactoryProperties();
+        fp.logLevel = solace.LogLevel.WARN;
+        solace.SolclientFactory.init(fp);
+      } catch (e) {
+        /* already initialised on a prior call — safe to ignore */
+      }
+      sdkReady = true;
+    }
+    return true;
+  }
+
+  /* ─── Config persistence ─────────────────────────────────────── */
+  function saveConfig() {
+    var rememberPw = document.getElementById('remember-pw').checked;
+    var cfg = {
+      smfUrl:    document.getElementById('smf-url').value.trim(),
+      vpn:       document.getElementById('vpn').value.trim(),
+      queue:     document.getElementById('queue').value.trim(),
+      username:  document.getElementById('username').value.trim(),
+      rememberPw: rememberPw
+    };
+    if (rememberPw) {
+      cfg.password = document.getElementById('password').value;
+    }
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(cfg)); } catch (e) {}
+  }
+
+  function loadConfig() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      var cfg = JSON.parse(raw);
+      if (cfg.smfUrl)   document.getElementById('smf-url').value   = cfg.smfUrl;
+      if (cfg.vpn)      document.getElementById('vpn').value       = cfg.vpn;
+      if (cfg.queue)    document.getElementById('queue').value     = cfg.queue;
+      if (cfg.username) document.getElementById('username').value  = cfg.username;
+      if (cfg.password) document.getElementById('password').value  = cfg.password;
+      document.getElementById('remember-pw').checked = !!cfg.rememberPw;
+    } catch (e) {}
+  }
+
+  /* ─── Connect ────────────────────────────────────────────────── */
+  window.startConsumer = function () {
+    clearBanners();
+    if (!initSdk()) return;
+
+    var smfUrl   = document.getElementById('smf-url').value.trim();
+    var vpn      = document.getElementById('vpn').value.trim()  || 'default';
+    var queue    = document.getElementById('queue').value.trim();
+    var username = document.getElementById('username').value.trim();
+    var password = document.getElementById('password').value;
+
+    if (!smfUrl)   { showBanner('error', 'Missing field', 'SMF WebSocket URL is required.'); return; }
+    if (!queue)    { showBanner('error', 'Missing field', 'Queue name is required.'); return; }
+    if (!username) { showBanner('error', 'Missing field', 'Username is required.'); return; }
+
+    saveConfig();
+    setStatus('connecting');
+    setBusy(true);
+
+    try {
+      solaceSession = solace.SolclientFactory.createSession({
+        url:              smfUrl,
+        vpnName:          vpn,
+        userName:         username,
+        password:         password,
+        connectRetries:   0,
+        reconnectRetries: 0
+      });
+    } catch (e) {
+      showBanner('error', 'Session creation failed', e.message || String(e));
+      setStatus('disconnected');
+      setBusy(false);
+      return;
+    }
+
+    solaceSession.on(solace.SessionEventCode.UP_NOTICE, function () {
+      setStatus('connected');
+      clearBanners();
+      showBanner('success', 'Session up', 'Connected to broker. Binding to queue "' + queue + '"…');
+      bindQueue(queue);
+    });
+
+    solaceSession.on(solace.SessionEventCode.CONNECT_FAILED_ERROR, function (evt) {
+      var msg = (evt && evt.infoStr) ? evt.infoStr : 'Could not reach the broker.';
+      showBanner('error', 'Connection failed',
+        msg + ' — verify the SMF WebSocket URL and credentials.');
+      setStatus('error');
+      setBusy(false);
+      solaceSession = null;
+    });
+
+    solaceSession.on(solace.SessionEventCode.DISCONNECTED, function () {
+      if (msgConsumer) {
+        try { msgConsumer.disconnect(); } catch (e) {}
+        msgConsumer = null;
+      }
+      setStatus('disconnected');
+      setBusy(false);
+      solaceSession = null;
+    });
+
+    solaceSession.on(solace.SessionEventCode.REJECTED_MESSAGE_ERROR, function (evt) {
+      showBanner('warning', 'Message rejected',
+        (evt && evt.infoStr) ? evt.infoStr : 'Broker rejected a published message.');
+    });
+
+    try {
+      solaceSession.connect();
+    } catch (e) {
+      showBanner('error', 'Connect error', e.message || String(e));
+      setStatus('error');
+      setBusy(false);
+      solaceSession = null;
+    }
+  };
+
+  /* ─── Bind to queue ──────────────────────────────────────────── */
+  function bindQueue(queueName) {
+    if (!solaceSession) return;
+
+    try {
+      msgConsumer = solaceSession.createMessageConsumer({
+        queueDescriptor: {
+          name: queueName,
+          type: solace.QueueType.QUEUE
+        },
+        acknowledgeMode:  solace.MessageConsumerAcknowledgeMode.CLIENT,
+        createIfMissing:  false
+      });
+    } catch (e) {
+      showBanner('error', 'Consumer creation failed', e.message || String(e));
+      return;
+    }
+
+    msgConsumer.on(solace.MessageConsumerEventName.UP, function () {
+      clearBanners();
+      showBanner('success', 'Ready', 'Consuming from queue "' + queueName + '"');
+    });
+
+    msgConsumer.on(solace.MessageConsumerEventName.DOWN, function () {
+      setStatus('disconnected');
+      setBusy(false);
+    });
+
+    msgConsumer.on(solace.MessageConsumerEventName.DOWN_ERROR, function (evt) {
+      showBanner('error', 'Consumer error',
+        (evt && evt.infoStr) ? evt.infoStr : 'Consumer went down unexpectedly.');
+      setStatus('error');
+      setBusy(false);
+    });
+
+    msgConsumer.on(solace.MessageConsumerEventName.CONNECT_FAILED_ERROR, function (evt) {
+      var detail = (evt && evt.infoStr) ? evt.infoStr : '';
+      showBanner('error', 'Queue bind failed',
+        'Could not bind to "' + queueName + '". ' + detail +
+        ' Check the queue name and client permissions.');
+      setStatus('error');
+      setBusy(false);
+    });
+
+    msgConsumer.on(solace.MessageConsumerEventName.MESSAGE, function (msg) {
+      onMessage(msg, queueName);
+      try { msg.acknowledge(); } catch (e) {}
+    });
+
+    try {
+      msgConsumer.connect();
+    } catch (e) {
+      showBanner('error', 'Consumer connect error', e.message || String(e));
+    }
+  }
+
+  /* ─── Disconnect ─────────────────────────────────────────────── */
+  window.stopConsumer = function () {
+    if (msgConsumer) {
+      try { msgConsumer.disconnect(); } catch (e) {}
+      msgConsumer = null;
+    }
+    if (solaceSession) {
+      try { solaceSession.disconnect(); } catch (e) {}
+      solaceSession = null;
+    }
+    setStatus('disconnected');
+    setBusy(false);
+  };
+
+  /* ─── Incoming message ───────────────────────────────────────── */
+  function onMessage(msg, queueName) {
+    var payload = '';
+    try {
+      var raw = msg.getBinaryAttachment();
+      if (raw instanceof Uint8Array || raw instanceof ArrayBuffer) {
+        var bytes = (raw instanceof ArrayBuffer) ? new Uint8Array(raw) : raw;
+        payload = new TextDecoder('utf-8').decode(bytes);
+      } else if (typeof raw === 'string') {
+        payload = raw;
+      } else {
+        var sdt = msg.getSdtContainer();
+        payload = sdt ? JSON.stringify(sdt) : '';
+      }
+    } catch (e) {
+      payload = '[unable to decode payload: ' + (e.message || e) + ']';
+    }
+
+    if (payload.length > 1048576) {
+      payload = payload.slice(0, 51200) + '\n\n[truncated — original payload exceeded 1 MB]';
+    }
+
+    var dest = null;
+    try { dest = msg.getDestination(); } catch (e) {}
+    var source = (dest && dest.getName) ? dest.getName() : queueName;
+
+    addMessage(payload, source, new Date());
+  }
+
+  /* ─── Render a message card ──────────────────────────────────── */
+  function addMessage(payload, source, ts) {
+    var empty = document.getElementById('empty-state');
+    if (empty) empty.remove();
+
+    totalReceived++;
+    messages.push({ ts: ts.toISOString(), source: source, payload: payload });
+
+    if (messages.length > MAX_MESSAGES) {
+      messages.shift();
+      var feed = document.getElementById('message-feed');
+      if (feed.firstChild) feed.removeChild(feed.firstChild);
+    }
+
+    var id = 'msg-' + totalReceived;
+    var rendered = renderPayload(payload);
+
+    var card = document.createElement('div');
+    card.className = 'msg-card';
+    card.id = id;
+    card.innerHTML =
+      '<div class="msg-header">'                                                          +
+        '<span class="msg-time">'   + formatTime(ts)          + '</span>'                +
+        '<span class="msg-source">' + escapeHtml(source)      + '</span>'                +
+        '<span class="msg-type">'   + (rendered.json ? 'JSON' : 'text') + '</span>'      +
+        '<span class="msg-actions">'                                                      +
+          '<button class="msg-action-btn" title="Copy payload"'                          +
+            ' onclick="copyCard(\'' + id + '\')">&#10697;</button>'                      +
+          '<button class="msg-action-btn" title="Dismiss"'                               +
+            ' onclick="dismissCard(\'' + id + '\')">&#10005;</button>'                   +
+        '</span>'                                                                         +
+      '</div>'                                                                            +
+      '<div class="msg-body"><pre>' + rendered.html + '</pre></div>';
+
+    var feedEl = document.getElementById('message-feed');
+    feedEl.appendChild(card);
+    card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    updateCounters();
+    document.getElementById('sb-last').textContent = 'Last message: ' + formatTime(ts);
+  }
+
+  /* ─── Payload renderer ───────────────────────────────────────── */
+  function renderPayload(raw) {
+    var s = raw.trim();
+    try {
+      var obj = JSON.parse(s);
+      return { json: true, html: syntaxHighlight(JSON.stringify(obj, null, 2)) };
+    } catch (e) {
+      return { json: false, html: escapeHtml(s) };
+    }
+  }
+
+  function syntaxHighlight(json) {
+    return escapeHtml(json).replace(
+      /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,
+      function (match) {
+        var cls;
+        if (/^"/.test(match)) {
+          cls = /:$/.test(match) ? 'json-key' : 'json-string';
+        } else if (/true|false/.test(match)) {
+          cls = 'json-bool';
+        } else if (/null/.test(match)) {
+          cls = 'json-null';
+        } else {
+          cls = 'json-number';
+        }
+        return '<span class="' + cls + '">' + match + '</span>';
+      }
+    );
+  }
+
+  /* ─── Card actions ───────────────────────────────────────────── */
+  window.copyCard = function (id) {
+    var card = document.getElementById(id);
+    if (!card) return;
+    var pre = card.querySelector('.msg-body pre');
+    if (!pre) return;
+    navigator.clipboard.writeText(pre.innerText).then(function () {
+      var btn = card.querySelector('.msg-action-btn');
+      if (btn) {
+        var orig = btn.innerHTML;
+        btn.innerHTML = '&#10003;';
+        setTimeout(function () { btn.innerHTML = orig; }, 1200);
+      }
+    }).catch(function () {});
+  };
+
+  window.dismissCard = function (id) {
+    var el = document.getElementById(id);
+    if (el) el.remove();
+    updateCounters();
+  };
+
+  window.clearMessages = function () {
+    messages = [];
+    var feed = document.getElementById('message-feed');
+    feed.innerHTML =
+      '<div id="empty-state">' +
+        '<div class="empty-icon">&#9741;</div>' +
+        '<p>No messages — waiting for the next one…</p>' +
+      '</div>';
+    updateCounters();
+  };
+
+  /* ─── Export ─────────────────────────────────────────────────── */
+  window.exportMessages = function () {
+    if (!messages.length) {
+      showBanner('warning', 'Nothing to export', 'The message feed is empty.');
+      return;
+    }
+    var blob = new Blob([JSON.stringify(messages, null, 2)], { type: 'application/json' });
+    var url  = URL.createObjectURL(blob);
+    var a    = document.createElement('a');
+    a.href     = url;
+    a.download = 'aem-messages-' + new Date().toISOString().slice(0,19).replace(/:/g,'-') + '.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 5000);
+  };
+
+  /* ─── Theme ──────────────────────────────────────────────────── */
+  window.toggleTheme = function () {
+    var isLight = document.documentElement.classList.toggle('light');
+    try { localStorage.setItem('aem_theme', isLight ? 'light' : 'dark'); } catch (e) {}
+  };
+
+  function applyTheme() {
+    try {
+      if (localStorage.getItem('aem_theme') === 'light') {
+        document.documentElement.classList.add('light');
+      }
+    } catch (e) {}
+  }
+
+  /* ─── Config panel toggle ────────────────────────────────────── */
+  window.toggleConfig = function () {
+    var form = document.getElementById('config-form');
+    var icon = document.getElementById('config-toggle-icon');
+    var open = form.classList.toggle('visible');
+    icon.classList.toggle('open', open);
+  };
+
+  /* ─── Status helpers ─────────────────────────────────────────── */
+  function setStatus(state) {
+    var badge  = document.getElementById('status-badge');
+    var dot    = badge.querySelector('.badge-dot');
+    var label  = document.getElementById('status-text');
+    ['connected','connecting','error'].forEach(function (c) { badge.classList.remove(c); });
+    dot.classList.remove('pulse');
+
+    if      (state === 'connected')  { badge.classList.add('connected');  label.textContent = 'Connected'; }
+    else if (state === 'connecting') { badge.classList.add('connecting'); label.textContent = 'Connecting…'; dot.classList.add('pulse'); }
+    else if (state === 'error')      { badge.classList.add('error');      label.textContent = 'Error'; }
+    else                             { label.textContent = 'Disconnected'; }
+  }
+
+  function setBusy(isBusy) {
+    document.getElementById('connect-btn').disabled    =  isBusy;
+    document.getElementById('disconnect-btn').disabled = !isBusy;
+  }
+
+  function updateCounters() {
+    var n = document.querySelectorAll('.msg-card').length;
+    document.getElementById('msg-count').textContent  = n + (n === 1 ? ' message' : ' messages');
+    document.getElementById('sb-total').textContent   = 'Total received: ' + totalReceived;
+  }
+
+  /* ─── Banner helpers ─────────────────────────────────────────── */
+  var BANNER_ICONS = { error: '&#9888;', warning: '&#9888;', success: '&#10003;', info: '&#8505;' };
+
+  function showBanner(type, title, body) {
+    var el = document.createElement('div');
+    el.className = 'banner ' + type;
+    el.innerHTML =
+      '<span class="banner-icon">' + (BANNER_ICONS[type] || BANNER_ICONS.info) + '</span>' +
+      '<span class="banner-body"><strong>' + escapeHtml(title) + '</strong> ' + escapeHtml(body) + '</span>' +
+      '<button class="banner-close" onclick="this.parentElement.remove()">&#10005;</button>';
+    document.getElementById('banners').appendChild(el);
+  }
+
+  function clearBanners() {
+    document.getElementById('banners').innerHTML = '';
+  }
+
+  /* ─── Utilities ──────────────────────────────────────────────── */
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g,  '&amp;')
+      .replace(/</g,  '&lt;')
+      .replace(/>/g,  '&gt;')
+      .replace(/"/g,  '&quot;');
+  }
+
+  function formatTime(d) {
+    return d.toLocaleTimeString('en-GB', { hour12: false }) +
+      '.' + String(d.getMilliseconds()).padStart(3, '0');
+  }
+
+  /* ─── file:// origin notice ──────────────────────────────────── */
+  function checkOrigin() {
+    if (location.protocol === 'file:') {
+      showBanner('info', 'Running from disk',
+        'WebSocket (SMF) connections work fine from file://. ' +
+        'If the CDN script fails to load, serve with: python3 -m http.server 8080');
+    }
+  }
+
+  /* ─── Boot ───────────────────────────────────────────────────── */
+  applyTheme();
+  loadConfig();
+  checkOrigin();
+
+  /* Persist config on any field change */
+  ['smf-url', 'vpn', 'queue', 'username', 'remember-pw'].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) el.addEventListener('change', saveConfig);
+  });
+
+}());
+</script>
+</body>
+</html>

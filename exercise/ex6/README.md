@@ -6,6 +6,14 @@ After completing these steps you will have created your own custom event payload
 
 > NOTE: This is a deep dive topic. It assumes you have completed at least [Exercise 1](../ex1/README.md) and know how to connect the TryMe! tool to your broker.
 
+## User Data and Password
+
+In order to log into Event Studio, you can use the below email address with XXX replaced with your group number.
+
+teched_xxx@asapio.com (e.g. teched_001@asapio.com)
+
+The password will be provided to you by the moderators.
+
 ## Exercise 6.1 Learn about Event Studio and the Scenario
 
 The Event Add-On for ERP brings event-driven capabilities to SAP S/4HANA and other ABAP-based backends. <b>Event Studio</b> is its cockpit for designing events: you define <b>what</b> an event contains (the payload), <b>when</b> it is raised (the event), and <b>where</b> it is sent (the connection and topic on the event broker).
@@ -24,22 +32,22 @@ In this exercise you do the following:
 
 ## Exercise 6.2 Create your CDS Payload
 
-1. Open <b>Event Studio</b>: `[TBC: URL / Fiori Launchpad entry and user]`
+1. Open <b>Event Studio</b>: https://url.sap/p1ueid 
 
 You start on the <b>Data Objects</b> screen. It lists the payloads that are available, for example the ASAPIO standard payloads for PurchaseOrder, BillingItem or BusinessPartner.
 
 ![Pic 1](images/ex6-1.png)
 
-2. Click <b>Create CDS Payload</b>.
+1. Click <b>Create CDS Payload</b>.
 
-3. Fill out the form:
+2. Fill out the form:
 
    - <b>Name</b>: `ZZ1_TECHED_<name>_<usernumber>`, replace `<name>` with a short name of your choice and `<usernumber>` with your participant number, e.g. `ZZ1_TECHED_EXAMPLE_000`
    - <b>Label</b>: a description of your choice, e.g. Demo for TechEd
    - <b>Data Source</b>: <b>I_SalesOrder</b>
    - <b>Scenario</b>: <b>STD (Standard)</b>
 
-4. Click <b>Create</b>.
+3. Click <b>Create</b>.
 
 ![Pic 2](images/ex6-2.png)
 
@@ -53,19 +61,21 @@ You are now in the Custom CDS app, in the details of your CDS view. The steps at
 
 ![Pic 4](images/ex6-4.png)
 
-1. Go to <b>Elements</b>. This is the list of all fields of the SalesOrder (14 elements).
+1. Go to <b>Elements</b>. This is the list of all fields in your payload.
 
-2. Decide which fields you want in your payload. For each field you can:
+2. To add fields to your payload, click <b>Add</b> above the list of elements and choose <b>Elements</b>.
 
-   - switch it <b>ON or OFF</b> using the toggle. The key field SalesOrder is always on.
-   - change the <b>Alias</b>, which is the field name in the payload
-   - change the <b>Label</b>
+![Pic 12](images/ex6-12.png)
 
-3. Adjust the fields as you like, e.g. rename CreatedByUser to CreatedBy.
+3. The <b>Select: Elements</b> dialog opens. Select the fields you want to add to your payload. Fields of associated entities (for example `_Item` for the SalesOrder items) are listed below the main data source I_SalesOrder. The fields you have selected are shown under <b>Selected Items and Conditions</b>. Click <b>OK</b>.
 
-![Pic 5](images/ex6-5.png)
+![Pic 13](images/ex6-13.png)
 
-4. `[TBC: Save and release the view - the screenshot shows the view in status "Draft" / "Changed" after editing. Describe the button(s) to save and release again.]`
+   > TIP: Keep <b>Show Used</b> on <b>No</b> to see only the fields that are not yet part of your payload.
+
+4. The new fields appear in the list of elements. After your changes the view is in status <b>Draft</b> / <b>Changed</b>. Click <b>Publish</b> at the bottom to save and activate the view and release it for further use.
+
+![Pic 14](images/ex6-14.png)
 
 > Keep your first version small. You can come back and change it later.
 
@@ -104,7 +114,7 @@ Your payload is marked as <b>CDS Payload</b> and is <b>Not in use</b> yet.
    - <b>Interface Name</b>: pre-filled based on your payload name, no change needed
    - <b>Connection</b>: <b>SAP_AEM_POC_AI (SOLACE)</b>
    - <b>Header Fields</b>: keep the defaults (POST, application/json, Persistent). The <b>SOLACE_TOPIC</b> header is the fallback topic used if the dynamic topic cannot be built.
-   - <b>Solace Dynamic Topic</b>: build the topic from the segments <b>sap.com / teched / username / { I_SalesOrder.SalesOrder }</b>. Replace <b>username</b> with `[TBC: participant number / user]`. The last segment is a field of the payload, so each SalesOrder is sent to its own topic.
+   - <b>Solace Dynamic Topic</b>: build the topic from the segments <b>sap.com / teched / username / { I_SalesOrder.SalesOrder }</b>. Replace <b>username</b> with your username. The last segment is a field of the payload, so each SalesOrder is sent to its own topic.
    - <b>Load Type</b>: <b>Incremental Load</b>
    - <b>Activation</b>: checked
 

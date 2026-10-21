@@ -133,7 +133,6 @@ In case that you would like to dig deeper into event-driven architecture: a lot 
     - [Help](https://help.pubsub.em.services.cloud.sap/Cloud/cloud-lp.htm)
     - [SAP Discovery Center - AEM](https://discovery-center.cloud.sap/serviceCatalog/advanced-event-mesh?region=all)
     - [Advanced Event Mesh Tutorials](https://help.pubsub.em.services.cloud.sap/Cloud/ggs_signup.htm)
-    - [SAP EDA Strategy Paper](https://d.dam.sap.com/a/LFK8XBY/SAP%20EDA%20Extended%20Paper%20101424%20v7.pdf?rc=10&inline=true)
 
 ## Getting Started
 

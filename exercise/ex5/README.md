@@ -151,4 +151,4 @@ You've now explored how you scale your event-driven architecture. And this is th
 
 If you want to, you can now have a closer look at one of the advanced deep dive topics.
 
- - Go back to the Deep Dive Topics on the main page - [Main Page](../../#deep-dive-topics)
+ - Go back to the Deep Dive Topics on the main page - [Main Page](../../README.md#deep-dive-topics)

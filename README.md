@@ -65,32 +65,32 @@ SAP Integration Suite, advanced event mesh
 
 - [Exercise 1 - Explore SAP Integration Suite, advanced event mesh](exercise/ex1/README.md)
 
-    - [Exercise 1.1 - Log into Advanced Event Mesh and Explore it](exercise/ex1#exercise-11---log-into-advanced-event-mesh-and-explore-it)
-    - [Exercise 1.2 - Create a Queue in Advanced Event Mesh ](exercise/ex1#exercise-12---create-a-queue-in-advanced-event-mesh)
-    - [Exercise 1.3 - Create a Subscription in Advanced Event Mesh](exercise/ex1#exercise-13---create-a-queue-subscription-in-advanced-event-mesh)
-    - [Exercise 1.4 - Send an event from the Try Me! Tool to your Topic](exercise/ex1#exercise-14---send-an-event-from-the-try-me-tool-to-your-topic)
-    - [Exercise 1.5 - Consume events from an external consumer app](exercise/ex1#exercise-15---consume-events-using-an-external-consumer-app)
+    - [Exercise 1.1 - Log into Advanced Event Mesh and Explore it](exercise/ex1/README.md#exercise-11---log-into-advanced-event-mesh-and-explore-it)
+    - [Exercise 1.2 - Create a Queue in Advanced Event Mesh ](exercise/ex1/README.md#exercise-12---create-a-queue-in-advanced-event-mesh)
+    - [Exercise 1.3 - Create a Subscription in Advanced Event Mesh](exercise/ex1/README.md#exercise-13---create-a-queue-subscription-in-advanced-event-mesh)
+    - [Exercise 1.4 - Send an event from the Try Me! Tool to your Topic](exercise/ex1/README.md#exercise-14---send-an-event-from-the-try-me-tool-to-your-topic)
+    - [Exercise 1.5 - Consume events from an external consumer app](exercise/ex1/README.md#exercise-15---consume-events-using-an-external-consumer-app)
 
 - [Exercise 2 - Topic Hierarchies](exercise/ex2/README.md)
 
-    - [Exercise 2.1 - Learn about Topic Hierarchies and Wildcards](exercise/ex2##exercise-21-learn-about-topic-hierarchies-and-wildcards)
-    - [Exercise 2.2 - Practice Topic Hierarchies and Wildcards using Try Me !](exercise/ex2##exercise-22-practice-topic-hierarchies-and-wildcards-using-try-me----berlin-edition) 
+    - [Exercise 2.1 - Learn about Topic Hierarchies and Wildcards](exercise/ex2/README.md#exercise-21-learn-about-topic-hierarchies-and-wildcards)
+    - [Exercise 2.2 - Practice Topic Hierarchies and Wildcards using Try Me !](exercise/ex2/README.md#exercise-22-practice-topic-hierarchies-and-wildcards-using-tryme---berlin-edition) 
 
 - [Exercise 3 - Persistent and Non-Persistent Quality of Service](exercise/ex3/README.md)
 
-    - [Exercise 3.1 - Learn about Persistency and QoS](exercise/ex3#exercise-31-learn-about-delivery-modes-persistency-and-quality-of-service)
-    - [Exercise 3.2 - Experimenting with Persistency](exercise/ex3#experimenting-with-persistency)
+    - [Exercise 3.1 - Learn about Persistency and QoS](exercise/ex3/README.md#exercise-31-learn-about-delivery-modes-persistency-and-quality-of-service)
+    - [Exercise 3.2 - Experimenting with Persistency](exercise/ex3/README.md#exercise-32-experimenting-with-persistency)
 
 - [Exercise 4 - Event Replay](exercise/ex4/README.md)
 
-    - [Exercise 4.1 - Learn about Replay](exercise/ex4/README.md#exercise-41-learn-about)
+    - [Exercise 4.1 - Learn about Replay](exercise/ex4/README.md#exercise-41-learn-about-replay)
     - [Exercise 4.2 - Experimenting with Replay](exercise/ex4/README.md#exercise-42-experimenting-with-replay)
 
 - [Exercise 5 - The Event-Driven Hockey Stick](exercise/ex5/README.md)
 
-    - [Exercise 5.1 - Learn about the Event-Driven Hockey Stick](exercise/ex5/README.md#exercise-51-learn-about)
-    - [Exercise 5.2 - Explore Events in the SAP Business Accelerator Hub](exercise/ex5/README.md#exercise-52-explore-business-accelerator-hub)
-    - [Exercise 5.3 - Experiment with the Event Portal](exercise/ex5/README.md#exercise-53-experimenting-with-replay)
+    - [Exercise 5.1 - Learn about the Event-Driven Hockey Stick](exercise/ex5/README.md#exercise-51-learn-about-the-event-driven-hockey-stick)
+    - [Exercise 5.2 - Explore Events in the SAP Business Accelerator Hub](exercise/ex5/README.md#exercise-52-explore-events-in-the-sap-business-accelerator-hub)
+    - [Exercise 5.3 - Experiment with the Event Portal](exercise/ex5/README.md#exercise-53-experiment-with-the-event-portal)
 
 ### Deep Dive Topics 
 

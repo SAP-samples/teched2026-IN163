@@ -31,7 +31,7 @@ Messages flagged as `Persistent` result in an acknowledgment message being sent 
  <b>Non-Persistent message delivery</b> is also referred to by other names depending on the protocol or context, here are some synonyms and similar terms:
  - `Direct Messaging`, `QoS0`, `at-most-once delivery`
 
-### Experimenting with Persistency
+## Exercise 3.2 Experimenting with Persistency
 
 In this section we are going to play a bit around with persistency to see what this really means in a practical example using built-in <b>Try-Me tool</b>.
 So, let's open up the `Try-Me` tool used in the last exercise.

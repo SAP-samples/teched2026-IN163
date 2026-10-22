@@ -1,4 +1,4 @@
-![Pic 0](../../images/ex7-0.png)
+![Pic 0](images/ex7-0.png)
 
 # Exercise 7 - Building a Micro-Integration to publish files onto your Mesh
 

@@ -63,7 +63,7 @@ Preparation and Setup
 
 SAP Integration Suite, advanced event mesh
 
-- [Exercise 1 - Explore SAP Integration Suite, advanced event mesh](exercise/ex1/)
+- [Exercise 1 - Explore SAP Integration Suite, advanced event mesh](exercise/ex1/README.md)
 
     - [Exercise 1.1 - Log into Advanced Event Mesh and Explore it](exercise/ex1#exercise-11---log-into-advanced-event-mesh-and-explore-it)
     - [Exercise 1.2 - Create a Queue in Advanced Event Mesh ](exercise/ex1#exercise-12---create-a-queue-in-advanced-event-mesh)
@@ -71,22 +71,22 @@ SAP Integration Suite, advanced event mesh
     - [Exercise 1.4 - Send an event from the Try Me! Tool to your Topic](exercise/ex1#exercise-14---send-an-event-from-the-try-me-tool-to-your-topic)
     - [Exercise 1.5 - Consume events from an external consumer app](exercise/ex1#exercise-15---consume-events-using-an-external-consumer-app)
 
-- [Exercise 2 - Topic Hierarchies](exercise/ex2/)
+- [Exercise 2 - Topic Hierarchies](exercise/ex2/README.md)
 
     - [Exercise 2.1 - Learn about Topic Hierarchies and Wildcards](exercise/ex2##exercise-21-learn-about-topic-hierarchies-and-wildcards)
     - [Exercise 2.2 - Practice Topic Hierarchies and Wildcards using Try Me !](exercise/ex2##exercise-22-practice-topic-hierarchies-and-wildcards-using-try-me----berlin-edition) 
 
-- [Exercise 3 - Persistent and Non-Persistent Quality of Service](exercise/ex3/)
+- [Exercise 3 - Persistent and Non-Persistent Quality of Service](exercise/ex3/README.md)
 
     - [Exercise 3.1 - Learn about Persistency and QoS](exercise/ex3#exercise-31-learn-about-delivery-modes-persistency-and-quality-of-service)
     - [Exercise 3.2 - Experimenting with Persistency](exercise/ex3#experimenting-with-persistency)
 
-- [Exercise 4 - Event Replay](exercise/ex4/)
+- [Exercise 4 - Event Replay](exercise/ex4/README.md)
 
     - [Exercise 4.1 - Learn about Replay](exercise/ex4/README.md#exercise-41-learn-about)
     - [Exercise 4.2 - Experimenting with Replay](exercise/ex4/README.md#exercise-42-experimenting-with-replay)
 
-- [Exercise 5 - The Event-Driven Hockey Stick](exercise/ex5/)
+- [Exercise 5 - The Event-Driven Hockey Stick](exercise/ex5/README.md)
 
     - [Exercise 5.1 - Learn about the Event-Driven Hockey Stick](exercise/ex5/README.md#exercise-51-learn-about)
     - [Exercise 5.2 - Explore Events in the SAP Business Accelerator Hub](exercise/ex5/README.md#exercise-52-explore-business-accelerator-hub)
@@ -96,9 +96,9 @@ SAP Integration Suite, advanced event mesh
 
 The Deep Dive track contains advanced topics. You can pick a single topic, or work on both topics in whatever order you like.
 
-- [Exercise 6 - Event Add-On for ERP - Event Studio Deep Dive ](exercise/ex6/)
+- [Exercise 6 - Event Add-On for ERP - Event Studio Deep Dive ](exercise/ex6/README.md)
 
-- [Exercise 7 - Micro-Integrations](exercise/ex7/)
+- [Exercise 7 - Micro-Integrations](exercise/ex7/README.md)
 
 ## User Data and Password
 
@@ -136,7 +136,7 @@ In case that you would like to dig deeper into event-driven architecture: a lot 
 
 ## Getting Started
 
-Please continue with [Exercise 0](exercise/ex0/)
+Please continue with [Exercise 0](exercise/ex0/README.md)
 
 ## How to obtain support
 

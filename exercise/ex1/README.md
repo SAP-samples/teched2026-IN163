@@ -1,4 +1,4 @@
-![Pic 0](../../images/ex1-0.png)
+![Pic 0](images/ex1-0.png)
 
 ## Exercise 1.1 - Log into Advanced Event Mesh and explore it
 
@@ -15,7 +15,7 @@ Link: https://eu10.console.pubsub.em.services.cloud.sap/login?zone-id=908a280d-c
 
 2. Explore Advanced Event Mesh  
 
-![Pic 1](../../images/ex1-1.png)
+![Pic 1](images/ex1-1.png)
 
 Check out the different areas in the <b>Advanced Event Mesh cockpit</b>, representing the different categories of services AEM offers:
 
@@ -35,7 +35,7 @@ Check out the different areas in the <b>Advanced Event Mesh cockpit</b>, represe
 > If you don't see any broker, please uncheck Only show my services
 
 
-![Pic 13](../../images/ex1-13.png)
+![Pic 13](images/ex1-13.png)
 
 > [!TIP]
 > If you are asked to select an Environment, click `Default` from the drop-down.
@@ -45,11 +45,11 @@ Check out the different areas in the <b>Advanced Event Mesh cockpit</b>, represe
 
 5. Click <b>Open Broker Manager</b>
 
-![Pic 14](../../images/ex1-14.png)  
+![Pic 14](images/ex1-14.png)  
 
 6. Explore the <b>Broker Manager</b>
 
-![Pic 15](../../images/ex1-15.png)  
+![Pic 15](images/ex1-15.png)  
 
 On the left side of the screen are the main sections to navigate through:
 
@@ -68,36 +68,36 @@ After completing these steps you will have created a queue in Advanced Event Mes
 1. Go back to the original tab in your browser and click on <b>Cluster Manager</b> on the left.
 2. In the All Services screen click on the <b>Broker Europe Tile</b> (Frankfurt)
 
-![Pic 2](../../images/ex1-2.png)  
+![Pic 2](images/ex1-2.png)  
 
 > [!TIP]
 > If you cannot see the tiles, uncheck the Only show my services box
 
 3. Press <b>Manage</b>
 
-![Pic 4](../../images/ex1-4.png)     
+![Pic 4](images/ex1-4.png)     
 
 4. Under <b>Broker Manager Quick Setting</b> click the Queues link. A new window opens up.
 
-![Pic 5](../../images/ex1-5.png)      
+![Pic 5](images/ex1-5.png)      
 
 5. Click the <b>+Queue</b> button on the top right
 
-![Pic 6](../../images/ex1-6.png)        
+![Pic 6](images/ex1-6.png)        
 
 6. In the pop up enter the <b>queue name: User_*** (replace *** with your number)</b>
 
 7. Click <b>Create</b>
 
-![Pic 7](../../images/ex1-7.png)      
+![Pic 7](images/ex1-7.png)      
 
 8. On the next screen click <b>Apply</b>
 
-![Pic 8](../../images/ex1-8.png)      
+![Pic 8](images/ex1-8.png)      
 
 9. Check whether you can find your queue in the list  
 
-![Pic 9](../../images/ex1-9.png)   
+![Pic 9](images/ex1-9.png)   
 
 ## Exercise 1.3 - Create a queue subscription in Advanced Event Mesh
 
@@ -107,12 +107,12 @@ After completing these steps you will have created a queue in Advanced Event Mes
 
 12. Click on "+Subscription" button
 
-![Pic 10](../../images/ex1-10.png)  
+![Pic 10](images/ex1-10.png)  
 
 
 13. Enter the topic into the field. Use <b>topic_user_XXX</b> as the topic, and replace XXX with your group/participant number.
 
-![Pic 11](../../images/ex1-11.png)  
+![Pic 11](images/ex1-11.png)  
 
 HINT: Please note that this topic is very simple to facilitate this exercise. In real world scenarios, you can work with topic hierarchies that allow for filtering etc. And you could actually use dynamic topics, which are based on event data, as well. We will dive into this later.
 
@@ -120,61 +120,61 @@ HINT: Please note that this topic is very simple to facilitate this exercise. In
 
 15. Check on whether your queue subscription got created
 
-![Pic 12](../../images/ex1-12.png)  
+![Pic 12](images/ex1-12.png)  
 
 ## Exercise 1.4 - Send an event from the Try Me! tool to your topic
 
 16. Switch to the **"Try Me!"** Section in the menu on the left.
 
-![Pic 13](../../images/ex1-26.png)  
+![Pic 13](images/ex1-26.png)  
 
 17. You are now in the TryMe tool
 
-![Pic 14](../../images/ex1-27.png)  
+![Pic 14](images/ex1-27.png)  
 
 18. You might have to press the **"expand"-Icon** to show the connection details. Please note, that the properties have to be adjusted, otherwise the connection is not going to work. We will add the correct properties in the next steps.
 
 19. Keep your current browser tab open and **go back to the other/main tab** and click on **"Connect"**. Select **View by "Protocol"**.
 
-![Pic 15](../../images/ex1-28.png)  
+![Pic 15](images/ex1-28.png)  
 
 20. Open the **"Solace Web Messaging"** entry and select **"Solace JavaScript API"**. Now a Pop-up on the right shows the connection details to use.
 
-![Pic 16](../../images/ex1-29.png)  
+![Pic 16](images/ex1-29.png)  
 
 21. Copy these details into the according properties of the "Try Me!" tool. Overwrite existing values.
     
-![Pic 17](../../images/ex1-30.png)  
+![Pic 17](images/ex1-30.png)  
 
 22. Click on <b>Connect</b> in the <b>Publisher Section</b>
 > [!IMPORTANT]
 > If your browser asks to select a certificate for authentication, press "Cancel" otherwise the connection will fail! If you accidentially clicked on a certificate, please restart your browser to show the dialog again.
 
-![Pic 18](../../images/ex1-31.png)  
+![Pic 18](images/ex1-31.png)  
 
 23. Enter your topic. You can as well clear all the pre-filled entries by clicking the link. On top, add a message that you like. Recommendation would be Hello World!
     
-![Pic 19](../../images/ex1-32.png)  
+![Pic 19](images/ex1-32.png)  
 
 24. Click <b>Publish</b> to send your message to your topic
 
 25. You should see 1 message published in the <b>Publish Status</b>
 
-![Pic 20](../../images/ex1-33.png)  
+![Pic 20](images/ex1-33.png)  
 
 26. Switch back to the <b>Queues</b>
 
-![Pic 21](../../images/ex1-34.png)  
+![Pic 21](images/ex1-34.png)  
 
 27. Search for the queue you have created earlier. You should see one message queued.
 
-![Pic 22](../../images/ex1-35.png)  
+![Pic 22](images/ex1-35.png)  
 
 You have sent a message to a topic, and via the subscription this message has been stored in your queue.
 
 28. You can leave it like this or you can play the same game a little longer: go back to the Try Me! tool and just click publish, and see in the other tab how the count of messages gets increased (don't forget to refresh the page). When you click on your queue, you get a more detailed summary.
 
-![Pic 23](../../images/ex1-36.png)  
+![Pic 23](images/ex1-36.png)  
 
 ## Exercise 1.5 - Consume events using an external consumer app
 
@@ -190,23 +190,23 @@ Download this file and start it.
 
 30. The app starts up in your browser and looks like this
 
-![Pic 24](../../images/ex1-37.png)  
+![Pic 24](images/ex1-37.png)  
 
 31. Now fill in the required entries that you get from your broker. It's the same approach as before with the TryMe! tool. 
 
-![Pic 25](../../images/ex1-38.png) 
+![Pic 25](images/ex1-38.png) 
 
 With one difference: this time you need to enter the queue to consume from as well. The queue will most likely be User_XXX (replace XXX with your number).
 
-![Pic 26](../../images/ex1-39.png) 
+![Pic 26](images/ex1-39.png) 
 
 32. Click connect and make sure to click Cancel if you are asked for a certificate. You have to be quick, otherwise you get a timeout.
 
-![Pic 27](../../images/ex1-40.png) 
+![Pic 27](images/ex1-40.png) 
 
 33. Now you are connected and every event ending up in your queue is consumed by the Consumer-App.
 
-![Pic 28](../../images/ex1-41.png) 
+![Pic 28](images/ex1-41.png) 
 
 So, you have two options using the TryMe! tool: you can either send an event directly into the queue or you can publish an event to your topic.
 

@@ -35,20 +35,30 @@ Go to the SAP Business Accelerator Hub by entering the following URL into you br
 
 http://hub.sap.com
 
-This will take you to the main page of the Business Accelerator Hub:
+This will take you to the main page of the Business Accelerator Hub.
 
 ![Pic 2](images/ex5-2.png)
 
-Now there are two ways really to look for available events:
+Now there are two ways really to look for available events.
+Expand the two options below to see it in detail.
 
-1. Either via selecting your SAP <b>product</b> / event source
+<details>
+
+<summary>1. Either via selecting your SAP <b>product</b> / event source (expand for details)</summary>
 
 ![Pic 3](images/ex5-3.png)
-   
-2. Or by clicking on <b>Categories</b> to look for all available events 
+
+</details>
+
+<details>
+
+<summary>2. Or by clicking on <b>Categories</b> to look for all available events (expand for details)</summary>
 
 ![Pic 4](images/ex5-4.png)
 
+</details>
+
+<br>
 We will now take path 1, meaning we will look at available events for SAP S/4HANA Public Cloud Edition.
 
 Go to SAP S/4HANA Cloud Public Edition and click on <b>Events</b>
@@ -59,6 +69,15 @@ You can now click around and look at available events if you want to. Then enter
  into the search field.
  
 ![Pic 6](images/ex5-6.png)
+
+> [!IMPORTANT]
+> You need to logon with your own valid SAP ID.
+> <details>
+> <summary>expand for login screenshot</summary>
+> 
+> ![Pic 61](images/ex5-61.png)
+> 
+> </details>  
 
 Click on SalesOrder events. You get an overview of available SalesOrder events.
 

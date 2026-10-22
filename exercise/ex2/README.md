@@ -73,7 +73,8 @@ Clean up your Subscribed Topics so that you are not subscribing to any topics an
 
 Now try out different combinations of publishing to a topic and listening to a topic and see which events you receive.
 
-> Note: There are two options for you to do the steps described below - if you all publish to the same topic, others will receive your event as well. Which is good since this is the concept of topics.
+> [!IMPORTANT]  
+> There are two options for you to do the steps described below - if you all publish to the same topic, others will receive your event as well. Which is good since this is the concept of topics.
 >
 >  Maybe think about adding some message if you want others to read the event - something like "I like Currywurst!" while sending it to the currywurst topic could make sense 
 >

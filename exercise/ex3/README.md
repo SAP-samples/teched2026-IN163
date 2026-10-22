@@ -37,26 +37,34 @@ In this section we are going to play a bit around with persistency to see what t
 So, let's open up the `Try-Me` tool used in the last exercise.
 
 1. Remove all subscriptions from your subscriber and clear the messages
-
 ![Publish 1](images/ex3-1.png)
 
 2. Enter the topic into the topic field for the publisher. Use topic_user_XXX as the topic, and replace XXX with your group/participant number. And publish one message as direct.
 ![Publish 1](images/ex3-7.png)
 
+> [!NOTE]  
 > Did you receive anything?<br>
+
 No, of course not. Our Subscriber is not subscribed to the topic. Let's go ahead and add the subscription.
 
 3. Enter the topic into the topic field for the subscriber. Use topic_user_XXX as the topic, and replace XXX with your group/participant number. And hit "Subscribe".
 ![Subscriber subscribed](images/ex3-9.png)
 
+> [!NOTE]  
 > Did you receive anything now?<br>
+
 No, still not. Our subscriber is using direct/non-persistent mode to subscribe directly to the topic on the broker. There's no persistency endpoint configured, so we don't receive any messages that were published while we were not subscribed or connected.<br>
 Let's go ahead and publish another message.
 
 4. Hit publish one more time.
 ![AEM Direct Message Received](images/ex3-10.png)
 
-> Now we've received a message, because both our publisher and subscriber are connected at the same time! This is non-persistent messaging, sometimes also referred to as best-effort messaging. <b>Publishers and Subscribers need to be connected at the same time and reachable</b> so that the messages can be delivered immediately from memory (meaning no network issues). This is the fastest mode, but it's not guaranteed to be lossless.
+> [!NOTE]  
+> Now we've received a message, because both our publisher and subscriber are connected at the same time! 
+> This is non-persistent messaging, sometimes also referred to as best-effort messaging. <b>Publishers and 
+> Subscribers need to be connected at the same time and reachable</b> so that the messages can be delivered 
+> immediately from memory (meaning no network issues). This is the fastest mode, but it's not guaranteed to 
+> be lossless.
 
 5. Publish a couple more messages, then clear your subscribers' messages and remove the topic subscription.
 ![Subscriber clear](images/ex3-11.png)
@@ -67,6 +75,7 @@ Let's go ahead and publish another message.
 14. Click on `Start Consume`.
 ![Consume from queue](images/ex3-13.png)
 
+> [!NOTE]  
 > What happened?<br>
 
 Did you receive multiple messages just now?<br>

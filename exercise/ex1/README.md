@@ -31,11 +31,15 @@ Check out the different areas in the <b>Advanced Event Mesh cockpit</b>, represe
 
 3. Click on <b>Cluster Manager</b>
 
-> Hint: if you don't see any broker, please uncheck Only show my services
+> [!TIP]
+> If you don't see any broker, please uncheck Only show my services
 
 
-![Pic 13](../../images/ex1-13.png)  
+![Pic 13](../../images/ex1-13.png)
 
+> [!TIP]
+> If you are asked to select an Environment, click `Default` from the drop-down.
+> ![Pic 13.1](images/ex1-131.png)
 
 4. Select a <b>Broker</b> by clicking on it
 
@@ -66,7 +70,8 @@ After completing these steps you will have created a queue in Advanced Event Mes
 
 ![Pic 2](../../images/ex1-2.png)  
 
-> HINT: If you cannot see the tiles, uncheck the Only show my services box
+> [!TIP]
+> If you cannot see the tiles, uncheck the Only show my services box
 
 3. Press <b>Manage</b>
 
@@ -142,7 +147,8 @@ HINT: Please note that this topic is very simple to facilitate this exercise. In
 ![Pic 17](../../images/ex1-30.png)  
 
 22. Click on <b>Connect</b> in the <b>Publisher Section</b>
->Important: If your browser asks to select a certificate for authentication, press "Cancel" otherwise the connection will fail! If you accidentially clicked on a certificate, please restart your browser to show the dialog again.
+> [!IMPORTANT]
+> If your browser asks to select a certificate for authentication, press "Cancel" otherwise the connection will fail! If you accidentially clicked on a certificate, please restart your browser to show the dialog again.
 
 ![Pic 18](../../images/ex1-31.png)  
 

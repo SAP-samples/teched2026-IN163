@@ -98,7 +98,21 @@ The Deep Dive track contains advanced topics. You can pick a single topic, or wo
 
 - [Exercise 6 - Event Add-On for ERP - Event Studio Deep Dive ](exercise/ex6/README.md)
 
+    - [Exercise 6.1 - Learn about Event Studio and the Scenario](exercise/ex6/README.md#exercise-61-learn-about-event-studio-and-the-scenario)
+    - [Exercise 6.2 - Open Event Studio and Create your CDS Payload](exercise/ex6/README.md#exercise-62-open-event-studio-and-create-your-cds-payload)
+    - [Exercise 6.3 - Define the Payload Content](exercise/ex6/README.md#exercise-63-define-the-payload-content)
+    - [Exercise 6.4 - Create an Event for your Payload](exercise/ex6/README.md#exercise-64-create-an-event-for-your-payload)
+    - [Exercise 6.5 - Deploy the Event to Advanced Event Mesh](exercise/ex6/README.md#exercise-65-deploy-the-event-to-advanced-event-mesh)
+    - [Exercise 6.6 - Consume your Events in AEM](exercise/ex6/README.md#exercise-66-consume-your-events-in-aem)
+    - [Exercise 6.7 - Change your Payload (Optional)](exercise/ex6/README.md#exercise-67-change-your-payload-optional)
+
 - [Exercise 7 - Micro-Integrations](exercise/ex7/README.md)
+
+    - [Exercise 7.1 - Micro-Integration Use Cases](exercise/ex7/README.md#71---micro-integration-use-cases)
+    - [Exercise 7.2 - Exploring Micro-Integrations](exercise/ex7/README.md#72---exploring-micro-integrations)
+    - [Exercise 7.3 - Getting familiar with the structure of a Micro-Integration](exercise/ex7/README.md#73---getting-familiar-with-the-structure-of-a-micro-integration)
+    - [Exercise 7.4 - Configuring and deploying a flow in an SFTP Source Micro-Integration](exercise/ex7/README.md#74---configuring-and-deploying-a-flow-in-an-sftp-source-micro-integration)
+    - [Exercise 7.5 - Micro-Integration Licensing (Optional)](exercise/ex7/README.md#75---micro-integration-licensing-optional)
 
 ## User Data and Password
 
@@ -121,6 +135,7 @@ In case that you would like to dig deeper into event-driven architecture: a lot 
 - Tutorials and Missions
 
     - [Discovery Center Mission: Get started with AEM](https://discovery-center.cloud.sap/missiondetail/4582/4870/)
+    - [Developer Center: AEM with SAP Integration Suite, SAP S/4HANA Cloud, SAP Build Proces Automation](https://developers.sap.com/tutorials/mission-get-started-with-sap-integration-suite-advanced-event-mesh/)
 
 - Videos
 

@@ -29,8 +29,6 @@ In this exercise you do the following:
 4. A <b>report</b> in the system updates a SalesOrder <b>every 2 minutes</b>. Each update raises an event, which is sent with <b>your</b> payload.
 5. You consume your events in AEM using the <b>Try Me!</b> tool.
 
-[Insert diagram: SalesOrder change -> Event Studio event -> CDS payload -> Connection -> AEM topic -> Try Me!]
-
 > [!IMPORTANT]
 > You do not need ABAP or CDS experience. Everything is done in the Event Studio UI.
 
@@ -164,7 +162,7 @@ Your payload is marked as <b>CDS Payload</b> and is <b>Not in use</b> yet.
 >
 > ![Pic 15-1](images/ex6-15-1.png)
 >
-> 2. Select `bla` provide `sap.com` and click `save`.
+> 2. Select `Default Value` provide `sap.com` and click `Save`.
 >
 > ![Pic 15-2](images/ex6-15-2.png)
 >
@@ -172,7 +170,7 @@ Your payload is marked as <b>CDS Payload</b> and is <b>Not in use</b> yet.
 > - teched
 > - \<usernumber\> 
 >
-> 4. To add the final *dynamic* segement select `blub` and provide
+> 4. To add the final *dynamic* segement select `Structure Field` and provide
 > - I_SalesOrder
 > - SalesOrder
 >
@@ -192,13 +190,13 @@ The interface is now deployed and active.
 
 The report that updates a SalesOrder runs every <b>2 minutes</b>. Each update raises a <b>Changed</b> event for the SalesOrder, and your interface sends it to AEM with your custom payload.
 
-1. Open the <b>Try Me!</b> tool in your AEM broker as you did in [Exercise 1.4](../ex1/README.md#exercise-14---send-an-event-from-the-try-me-tool-to-your-topic) or as documented in [Exercise 7.4.3](../ex7/README.md#743---testing-your-micro-integration-flow).
+1. Open the <b>Try Me!</b> tool in your AEM broker as you did in [Exercise 1.4](../ex1/README.md#exercise-14---send-an-event-from-the-try-me-tool-to-your-topic) or as documented in [Exercise 7.4.4](../ex7/README.md#744---testing-your-micro-integration-flow).
 
 2. Connect the <b>Subscriber</b> and subscribe to the topic you have configured. Use a wildcard for the SalesOrder number: `sap.com/teched/<usernumber>/>`, e.g. `sap.com/teched/001/>`
 
 3. Wait for the next run of the report. Your events arrive in the Subscriber.
 
-[Insert screenshot: Try Me! Subscriber showing a received payload]
+![Pic 17](images/ex6-17.png)
 
 4. Compare the payload with the fields you selected in your CDS payload. Does it look like what you intended?
 

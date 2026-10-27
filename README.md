@@ -1,5 +1,7 @@
 # TechEd 2026: Build your <span style="color:red;"> own </span> event-driven scenario with advanced event mesh
 
+[![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/teched2026-IN163)](https://api.reuse.software/info/github.com/SAP-samples/teched2026-IN163)
+
 ![Pic 1](images/ISF-1.png)
 
 ## Description

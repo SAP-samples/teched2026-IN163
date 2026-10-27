@@ -184,7 +184,7 @@ It might still be interesting - and give you some more the feeling of real E2E e
 
 We have therefore created this small HTML-Application that connects to the AEM Broker and consumes events from a queue.
 
-You can find it here in the GitHub structure: ex1/consumerapp/aem-consumer.html
+You can find it here in the GitHub structure: [ex1/consumerapp/aem-consumer.html](consumerapp/aem-consumer.html)
 
 Download this file and start it.
 

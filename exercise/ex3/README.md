@@ -75,6 +75,16 @@ Let's go ahead and publish another message.
 14. Click on `Start Consume`.
 ![Consume from queue](images/ex3-13.png)
 
+> [!Important]  
+> You are gettinfg the message: `Consumer inactive`?
+> ![Consume consumer inactive](images/ex3-14.png)
+> 
+> The reason for this is that you already have an existing consumer subscribed to your queue. Most likely it is the consumer app used in Example #1. Either click the dicsonnect button in that consumer app, or close that browser window.<br>There are two types of queues:
+> - **EXCLUSIVE** – only one consumer exclusively can access the queue at any point in time.
+> - **NON-EXCLUSIVE** – multiple consumers can access the queue at any point in time.
+> 
+> In this session we configured the queue to be `EXCLUSIVE`
+
 > [!NOTE]  
 > What happened?<br>
 
